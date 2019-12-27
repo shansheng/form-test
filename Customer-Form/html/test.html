@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test</title>
+        <style type="text/css" >
+            html,body
+            {
+                height:100%;
+                width:100%;
+                padding:0;
+                margin:0;
+            }
+            .dialog
+            {
+             /*   width:250px;
+                height:250px;*/
+                position:absolute;
+                background-color:#ccc;
+                -webkit-box-shadow:1px 1px 3px #292929;
+                -moz-box-shadow:1px 1px 3px #292929;
+                box-shadow:1px 1px 3px #292929;
+                /*margin:10px;*/
+                top:50px;
+                left: 50px;
+                opacity:1;
+            }
+            .dialog-title
+            {
+                color:#fff;
+                background-color:#404040;
+                font-size:12pt;
+                font-weight:bold;
+                padding:4px 6px;
+                cursor:move;
+                position:absolute;
+                top:50px;
+                left: 50px;
+            }
+            
+            .dialog-content
+            {
+                padding:4px;
+                cursor:move;
+            }
+            .none{
+                display: none;
+            }
+            .box{
+                width: 200px;
+                height: 500px;
+                background-color: gray;
+                line-height: 30px;
+                margin: 100px;
+            }
+            .place{
+                width: 200px;
+                height: 50px;
+                border: 1px dashed red;
+            }
+        </style>
+        <script type="text/javascript" src="../js/devWin.js"></script>
+    </head>
+    <body>
+        <!-- <div id="dlgTest" class="dialog"> -->
+            <div id = "title" class="dialog-title">Dialog</div>
+            <div id = "title2" class="dialog-title" style ="top:10px">Dialog</div>
+        <!-- </div> -->
+        <a id = "a" href="#">123</a>
+        <input id = "text" type="text" class = "none">
+        <div id = "box" class = "box">
+       <!-- <input type="" name="" placeholder=""> -->
+        </div>
+        <div class = "place"></div>
+    </body>
+    <script type="text/javascript">
+        //要传入的变量
+        //点击触发的对象 
+        var click = document.getElementById("title");
+        var click2 = document.getElementById("title2");
+        //放入的容器
+        var box = document.getElementById("box");
+        //容器内占位的DIV
+        var place = document.createElement("div");
+        place.className = "place";
+        //往容器内添加的对象
+        var create = document.createElement("input");
+        create.type = "text";
+        var create2 = document.createElement("input");
+        create2.type = "password";
+        //是否可以添加多个
+        var isMany = true;
+        createWin(click,create,isMany,place,box);
+        createWin(click2,create2,isMany,place,box);
+    </script>
+</html>
