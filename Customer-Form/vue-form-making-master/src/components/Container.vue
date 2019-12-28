@@ -73,7 +73,6 @@
             <el-button v-if="generateCode" type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">{{$t('fm.actions.code')}}</el-button>
           </el-header>
           <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
-            
             <widget-form v-if="!resetJson"  ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
           </el-main>
         </el-container>
@@ -206,7 +205,7 @@ export default {
     },
     basicFields: {
       type: Array,
-      default: () => ['input', 'textarea', 'number', 'radio', 'checkbox', 'time', 'date', 'rate', 'color', 'select', 'switch', 'slider', 'text']
+      default: () => ['title','input', 'textarea', 'number', 'radio', 'checkbox', 'time', 'date', 'rate', 'color', 'select','select_two', 'switch', 'slider', 'text']
     },
     advanceFields: {
       type: Array,
@@ -298,7 +297,7 @@ export default {
           name: this.$t(`fm.components.fields.${item.type}`)
         }
       })
-      // console.log(this.basicComponents);
+      console.log(this.basicComponents);
     },
     handleGoGithub () {
       window.location.href = 'https://github.com/GavinZhuLei/vue-form-making'
@@ -415,7 +414,7 @@ export default {
     widgetForm: {
       deep: true,
       handler: function (val) {
-        console.log(this.$refs.widgetForm)
+        // console.log(this.$refs.widgetForm)
       }
     },
     '$lang': function (val) {

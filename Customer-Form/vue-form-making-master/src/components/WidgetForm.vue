@@ -21,7 +21,6 @@
                   :align="element.options.align"
                   @click.native="handleSelectWidget(index)">
                   <el-col  v-for="(col, colIndex) in element.columns" :key="colIndex" :span="col.span ? col.span : 0">
-                    
                       <draggable
                         v-model="col.list"
                         :no-transition-on-drag="true"
@@ -37,7 +36,10 @@
                             :element="el" 
                             :select.sync="selectWidget" 
                             :index="i" 
-                            :data="col">
+                            :data="col"
+                            :labelWidth="data.config.labelWidth"
+                            :alignType="data.config.labelPosition"
+                          >
                           </widget-form-item>
                         </transition-group>
                       </draggable>
@@ -52,7 +54,7 @@
                 </el-row>
             </template>
             <template v-else>
-              <widget-form-item v-if="element && element.key"  :key="element.key" :element="element" :select.sync="selectWidget" :index="index" :data="data"></widget-form-item>
+              <widget-form-item v-if="element && element.key" :key="element.key" :element="element" :select.sync="selectWidget" :index="index" :data="data" :labelWidth="data.config.labelWidth" :alignType="data.config.labelPosition"></widget-form-item>
             </template>
           </template>
         </transition-group>
@@ -217,3 +219,23 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .widget-form-container{
+    /deep/ .el-form--label-center .el-form-item__label{
+      text-align:center;
+    }
+    .el-form-item__label{
+      padding:0;
+    }
+    // .el-form{
+    //   .widget-form-list{
+    //     .el-form-item{
+    //       padding-bottom:0;
+    //       border:1px solid red;
+    //     }
+    //   }
+    // }
+  }
+</style>
+

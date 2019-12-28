@@ -2,6 +2,7 @@ export default {
   fm: {
     components: {
       fields: {
+        title: 'Title',
         input: 'Input',
         textarea: 'Textarea',
         number: 'Number',
@@ -12,6 +13,7 @@ export default {
         rate: 'Rate',
         color: 'Color',
         select: 'Select',
+        select_two: 'Emergency',
         switch: 'Switch',
         slider: 'Slider',
         text: 'Text',
@@ -69,7 +71,8 @@ export default {
           title: 'Label Position',
           left: 'Left',
           right: 'Right',
-          top: 'Top'
+          top: 'Top',
+          center:'Center'
         },
         labelWidth: 'Label Width',
         size: 'Size',
@@ -81,6 +84,11 @@ export default {
         name: 'Name',
         width: 'Width',
         height: 'Height',
+        mat:'marginTop',
+        fontSize:'fontSize',
+        labelColor:'labelColor',//标题颜色
+        contColor:'contColor',//内容颜色
+        alignTxt:'Content Alignment',
         size: 'Size',
         labelWidth: 'Label Width',
         custom: 'Custom',

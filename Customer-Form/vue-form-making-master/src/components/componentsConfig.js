@@ -1,9 +1,31 @@
 export const basicComponents = [
   {
+    type: 'title',
+    icon: 'icon-input',
+    no_label:true,//没有标题
+    no_bor:true,
+    options: {
+      width: '100%',
+      height:'65',
+      mat:'',//上边距
+      alignTxt:'center',//内容对齐方式
+      labelColor:'',//标题颜色
+      contColor:'',//内容颜色
+      defaultValue: '',
+      required: false,
+      dataType: 'string',
+      pattern: '',
+      placeholder: '',
+      disabled: false,
+      fontSize:'16',
+    }
+  },
+  {
     type: 'input',
     icon: 'icon-input',
     options: {
       width: '100%',
+      mat:'',//上边距
       defaultValue: '',
       required: false,
       dataType: 'string',
@@ -193,6 +215,43 @@ export const basicComponents = [
     }
   },
   {
+    type: 'select_two',
+    icon: 'icon-select',
+    no_label:true,
+    no_bor:true,
+    options: {
+      defaultValue: '',
+      multiple: false,
+      disabled: false,
+      clearable: false,
+      placeholder: '',
+      required: false,
+      showLabel: false,
+      width: '100%',
+      alignTxt:'center',//内容对齐方式
+      labelColor:'',//标题颜色
+      contColor:'',//内容颜色
+      options: [
+        {
+          value: 'Option 1'
+        },
+        {
+          value: 'Option 2'
+        },{
+          value: 'Option 3'
+        }
+      ],
+      remote: false,
+      filterable: false,
+      remoteOptions: [],
+      props: {
+        value: 'value',
+        label: 'label'
+      },
+      remoteFunc: ''
+    }
+  },
+  {
     type: 'switch',
     icon: 'icon-switch',
     options: {
@@ -218,6 +277,14 @@ export const basicComponents = [
   },
   {
     type: 'text',
+    icon: 'icon-wenzishezhi-',
+    options: {
+      defaultValue: 'This is a text',
+      customClass: '',
+    }
+  },
+  {
+    type: 'head',
     icon: 'icon-wenzishezhi-',
     options: {
       defaultValue: 'This is a text',

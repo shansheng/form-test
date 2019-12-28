@@ -4,7 +4,7 @@
       <el-form-item :label="$t('fm.config.widget.model')" v-if="data.type!='grid'">
         <el-input v-model="data.model"></el-input>
       </el-form-item>
-      <el-form-item :label="$t('fm.config.widget.name')" v-if="data.type!='grid'">
+      <el-form-item :label="$t('fm.config.widget.name')" v-if="data.type!='grid' && !data.no_label">
         <el-input v-model="data.name"></el-input>
       </el-form-item>
       <el-form-item :label="$t('fm.config.widget.width')" v-if="Object.keys(data.options).indexOf('width')>=0">
@@ -14,6 +14,34 @@
       <el-form-item :label="$t('fm.config.widget.height')" v-if="Object.keys(data.options).indexOf('height')>=0">
         <el-input v-model="data.options.height"></el-input>
       </el-form-item>
+      <el-form-item :label="$t('fm.config.widget.mat')" v-if="Object.keys(data.options).indexOf('mat')>=0">
+        <el-input v-model="data.options.mat"></el-input>
+      </el-form-item>
+
+      <el-form-item :label="$t('fm.config.widget.fontSize')" v-if="Object.keys(data.options).indexOf('fontSize')>=0">
+        <el-input v-model="data.options.fontSize"></el-input>
+      </el-form-item>
+
+      <!-- 标题颜色 -->
+      <template v-if="data.options.labelColor">
+        <el-form-item :label="$t('fm.config.widget.labelColor')">
+          <el-select v-model="data.options.labelColor">
+            <el-option value="red"></el-option>
+            <el-option value="black"></el-option>
+          </el-select>
+        </el-form-item>
+      </template>
+
+
+      <!-- 内容颜色 -->
+      <template v-if="data.options.contColor">
+        <el-form-item :label="$t('fm.config.widget.contColor')">
+          <el-select v-model="data.options.contColor">
+            <el-option value="red"></el-option>
+            <el-option value="black"></el-option>
+          </el-select>
+        </el-form-item>
+      </template>
 
       <el-form-item :label="$t('fm.config.widget.size')" v-if="Object.keys(data.options).indexOf('size')>=0">
         {{$t('fm.config.widget.width')}} <el-input style="width: 90px;" type="number" v-model.number="data.options.size.width"></el-input>
@@ -84,7 +112,7 @@
           </div>
         </template>
         <template v-else>
-          <template v-if="data.type=='radio' || (data.type=='select'&&!data.options.multiple)">
+          <template v-if="data.type=='radio' || (data.type=='select'&&!data.options.multiple) || (data.type=='select_two'&&!data.options.multiple)">
             <el-radio-group v-model="data.options.defaultValue">
               <draggable tag="ul" :list="data.options.options" 
                 v-bind="{group:{ name:'options'}, ghostClass: 'ghost',handle: '.drag-item'}"
@@ -108,7 +136,7 @@
             </el-radio-group>
           </template>
 
-          <template v-if="data.type=='checkbox' || (data.type=='select' && data.options.multiple)">
+          <template v-if="data.type=='checkbox' || (data.type=='select' && data.options.multiple) || (data.type=='select_two' && data.options.multiple)">
             <el-checkbox-group v-model="data.options.defaultValue">
 
               <draggable tag="ul" :list="data.options.options" 
@@ -166,6 +194,17 @@
         ></el-color-picker>
         <el-switch v-if="data.type=='switch'" v-model="data.options.defaultValue"></el-switch>
       </el-form-item>
+
+      <!-- 内容对齐方式 -->
+      <template v-if="data.options.alignTxt">
+        <el-form-item :label="$t('fm.config.widget.alignTxt')">
+          <el-select v-model="data.options.alignTxt">
+            <el-option value="center"></el-option>
+            <el-option value="left"></el-option>
+            <el-option value="right"></el-option>
+          </el-select>
+        </el-form-item>
+      </template>
 
       <template v-if="data.type == 'time' || data.type == 'date'">
         <el-form-item :label="$t('fm.config.widget.showType')" v-if="data.type == 'date'">

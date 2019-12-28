@@ -2,6 +2,7 @@
   <div>
     <el-form ref="generateForm" 
       class="preview_formOutter"
+      :class="{'preview_formOutter_nolabel':data.config.labelWidth==0}"
       label-suffix=":"
       :size="data.config.size"
       :model="models" :rules="rules" :label-position="data.config.labelPosition" :label-width="data.config.labelWidth + 'px'">
@@ -19,7 +20,7 @@
               
 
               <template v-for="citem in col.list" >
-                <el-form-item v-if="citem.type=='blank'" :label="citem.name" :prop="citem.model" :key="citem.key">
+                <el-form-item v-if="citem.type=='blank'" :prop="citem.model" :key="citem.key">
                   <slot :name="citem.model" :model="models"></slot>
                 </el-form-item>
                 <genetate-form-item v-else 
@@ -28,6 +29,8 @@
                   :remote="remote" 
                   :rules="rules" 
                   :widget="citem"
+                  :labelWidth="data.config.labelWidth"
+                  :alignType="data.config.labelPosition"
                   @input-change="onInputChange">
                 </genetate-form-item>
               </template>
@@ -36,7 +39,7 @@
         </template>
 
         <template v-else-if="item.type == 'blank'">
-          <el-form-item :label="item.name" :prop="item.model" :key="item.key">
+          <el-form-item :prop="item.model" :key="item.key">
             <slot :name="item.model" :model="models"></slot>
           </el-form-item>
         </template>
@@ -47,6 +50,8 @@
             :models.sync="models" 
             :rules="rules" 
             :widget="item" 
+            :labelWidth="data.config.labelWidth"
+            :alignType="data.config.labelPosition"
             @input-change="onInputChange"
             :remote="remote">
           </genetate-form-item>
@@ -160,14 +165,56 @@ export default {
 <style lang="scss">
 // @import '../styles/cover.scss';
 .preview_formOutter{
-  border-top:1px solid #ccc;
-  border-left:1px solid #ccc;
-  .el-col{
-    border-right:1px solid #ccc;
-    border-bottom:1px solid #ccc;
-    padding:10px;
+  &.preview_formOutter_nolabel{
     .el-form-item{
-      margin-bottom:0;
+      .el-form-item__content{
+        border-left:0;
+      }
+    }
+  }
+  // .el-row{
+  //   border-left:1px solid #ccc;
+  //   border-bottom:1px solid #ccc;
+  //   border-right:1px solid #ccc;
+  //   &:first-child{
+  //     border-top:1px solid #ccc;
+  //   }
+  //   &:last-child{
+  //     margin-bottom:18px;
+  //   }
+  // }
+  // .el-col{
+  //   &:not(:first-child){
+  //     border-left:1px solid #ccc;
+  //   }
+  //   padding:10px;
+  //   .el-form-item{
+  //     margin-bottom:0;
+  //   }
+  // }
+
+  .el-row{
+    .el-col{
+      &:not(:first-child){
+        .el-form-item{
+          border-left:0;
+        }
+      }
+    }
+  }
+
+
+  .el-form--label-left .el-form-item__label {
+    text-align: left;
+  }
+  .el-form-item{
+    border:1px solid red;
+    margin-bottom:0;
+    &:not(:first-child){
+      border-top:0;
+    }
+    .el-form-item__content{
+      border-left:1px solid red;
     }
   }
 }

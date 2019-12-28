@@ -1,10 +1,21 @@
 <template>
   <el-form-item class="widget-view "
       v-if="element && element.key" 
-      :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
-      :label="element.name"
+      :class="{active: selectWidget.key == element.key, 'is_req': element.options.required,'no_label':element.no_label}"
+      :style="{'padding-top': element.options.mat+'px'}"
+      :label="labelWidth>0 ? element.name : ''"
       @click.native.stop="handleSelectWidget(index)"
-    >
+  >
+        <template v-if="element.type == 'title'">
+          <el-input 
+            v-model="element.options.defaultValue"
+            :class="{'custom_h':element.options.height>0}"
+            :style="{width: element.options.width,'font-size':element.options.fontSize+'px',height:element.options.height+'px','color':element.options.contColor}"
+            :placeholder="element.options.placeholder"
+            :disabled="element.options.disabled"     
+          ></el-input>
+        </template>
+
         <template v-if="element.type == 'input'">
           <el-input 
             v-model="element.options.defaultValue"
@@ -124,6 +135,27 @@
           </el-select>
         </template>
 
+        <template v-if="element.type == 'select_two'">
+          <div class="select_two">
+            <div 
+              class="select_two_tl"
+              :class="{'select_two_tl_fl':alignType=='left','select_two_tl_cen':alignType=='center','select_two_tl_fr':alignType=='right'}"
+              :style="{width:element.options.width ? element.options.width+'px' :'215px'}"
+            >{{element.name}}</div>
+            <el-select
+              v-model="element.options.defaultValue"
+              :disabled="element.options.disabled"
+              :multiple="element.options.multiple"
+              :clearable="element.options.clearable"
+              :placeholder="element.options.placeholder"
+              :style="{width: element.options.width}"
+            >
+              <el-option v-for="item in element.options.options" :key="item.value" :value="item.value" :label="element.options.showLabel?item.label:item.value"></el-option>
+            </el-select>
+          </div>
+          
+        </template>
+
         <template v-if="element.type=='switch'">
           <el-switch
             v-model="element.options.defaultValue"
@@ -198,12 +230,13 @@
         </div>
         
     </el-form-item>
+
 </template>
 
 <script>
 import FmUpload from './Upload'
 export default {
-  props: ['element', 'select', 'index', 'data'],
+  props: ['element', 'select', 'index', 'data','labelWidth','alignType'],
   components: {
     FmUpload,
   },
@@ -272,3 +305,33 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.no_label{
+  /deep/ .el-form-item__label{
+    display:none;
+  }
+  /deep/ .el-form-item__content{
+    margin-left:0 !important;
+  }
+  .select_two{
+    .select_two_tl{
+      &.select_two_tl_fl{
+        text-align:left;
+      }
+      &.select_two_tl_cen{
+        text-align:center;
+      }
+      &.select_two_tl_fr{
+        text-align:right;
+      }
+    }
+  }
+}
+.custom_h{
+  /deep/ .el-input__inner{
+    height:100%;
+  }
+}
+</style>
+
+

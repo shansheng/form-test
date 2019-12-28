@@ -6,6 +6,7 @@
           <el-radio-button label="left">{{$t('fm.config.form.labelPosition.left')}}</el-radio-button>
           <el-radio-button label="right">{{$t('fm.config.form.labelPosition.right')}}</el-radio-button>
           <el-radio-button label="top">{{$t('fm.config.form.labelPosition.top')}}</el-radio-button>
+          <el-radio-button label="center">{{$t('fm.config.form.labelPosition.center')}}</el-radio-button>
         </el-radio-group>
       </el-form-item>
 

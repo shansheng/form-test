@@ -2,6 +2,7 @@ export default {
   fm: {
     components: {
       fields: {
+        title: '标题',
         input: '单行文本',
         textarea: '多行文本',
         number: '计数器',
@@ -12,6 +13,7 @@ export default {
         rate: '评分',
         color: '颜色选择器',
         select: '下拉选择框',
+        select_two: '紧急程度',
         switch: '开关',
         slider: '滑块',
         text: '文字',
@@ -69,9 +71,10 @@ export default {
           title: '标签对齐方式',
           left: '左对齐',
           right: '右对齐',
-          top: '顶部对齐'
+          top: '顶部对齐',
+          center:'居中'
         },
-        labelWidth: '表单标签宽度',
+        labelWidth: '整体表单标签宽度',
         size: '组件尺寸',
         customClass: '自定义Class'
       },
@@ -81,6 +84,11 @@ export default {
         name: '标题',
         width: '宽度',
         height: '高度',
+        mat:'上边距',
+        fontSize:'字体大小',
+        labelColor:'标题颜色',//标题颜色
+        contColor:'内容颜色',//内容颜色
+        alignTxt:'内容对齐方式',
         size: '大小',
         labelWidth: '标签宽度',
         custom: '自定义',
