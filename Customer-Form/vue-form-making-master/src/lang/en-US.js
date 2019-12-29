@@ -3,6 +3,7 @@ export default {
     components: {
       fields: {
         title: 'Title',
+        sign:'sign',
         input: 'Input',
         textarea: 'Textarea',
         number: 'Number',

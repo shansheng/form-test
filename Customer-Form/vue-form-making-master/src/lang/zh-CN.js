@@ -3,6 +3,7 @@ export default {
     components: {
       fields: {
         title: '标题',
+        sign:'签名',
         input: '单行文本',
         textarea: '多行文本',
         number: '计数器',

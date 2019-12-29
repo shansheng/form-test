@@ -1,7 +1,7 @@
 <template>
   <el-form-item class="widget-view "
       v-if="element && element.key" 
-      :class="{active: selectWidget.key == element.key, 'is_req': element.options.required,'no_label':element.no_label}"
+      :class="{active: selectWidget.key == element.key, 'is_req': element.options.required,'no_label':element.no_label,'textarea_lh':element.type == 'textarea'}"
       :style="{'padding-top': element.options.mat+'px'}"
       :label="labelWidth>0 ? element.name : ''"
       @click.native.stop="handleSelectWidget(index)"
@@ -14,6 +14,12 @@
             :placeholder="element.options.placeholder"
             :disabled="element.options.disabled"     
           ></el-input>
+        </template>
+
+        <template v-if="element.type == 'sign'">
+          <div class="sign_com">
+            <div class="sign_cont"></div>
+          </div>
         </template>
 
         <template v-if="element.type == 'input'">
@@ -330,6 +336,18 @@ export default {
 .custom_h{
   /deep/ .el-input__inner{
     height:100%;
+  }
+}
+.textarea_lh{
+  /deep/ .el-form-item__label{
+    line-height:107px;
+  }
+}
+.sign_com{
+  .sign_cont{
+    min-height:100px;
+    border-radius: 4px;
+    border: 1px solid #DCDFE6;
   }
 }
 </style>

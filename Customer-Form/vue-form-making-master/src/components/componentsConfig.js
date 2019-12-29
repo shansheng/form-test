@@ -3,7 +3,26 @@ export const basicComponents = [
     type: 'title',
     icon: 'icon-input',
     no_label:true,//没有标题
-    no_bor:true,
+    no_bor:true,//没有边框
+    options: {
+      width: '100%',
+      height:'65',
+      mat:'',//上边距
+      alignTxt:'center',//内容对齐方式
+      labelColor:'',//标题颜色
+      contColor:'',//内容颜色
+      defaultValue: '',
+      required: false,
+      dataType: 'string',
+      pattern: '',
+      placeholder: '',
+      disabled: false,
+      fontSize:'16',
+    }
+  },
+  {
+    type: 'sign',
+    icon: 'icon-input',
     options: {
       width: '100%',
       height:'65',

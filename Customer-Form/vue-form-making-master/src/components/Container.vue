@@ -205,7 +205,7 @@ export default {
     },
     basicFields: {
       type: Array,
-      default: () => ['title','input', 'textarea', 'number', 'radio', 'checkbox', 'time', 'date', 'rate', 'color', 'select','select_two', 'switch', 'slider', 'text']
+      default: () => ['title','input', 'textarea', 'number', 'radio', 'checkbox', 'time', 'date', 'rate', 'color', 'select','select_two', 'switch', 'slider', 'text','sign']
     },
     advanceFields: {
       type: Array,
