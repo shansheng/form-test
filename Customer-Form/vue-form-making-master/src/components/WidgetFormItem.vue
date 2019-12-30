@@ -6,6 +6,7 @@
       :label="labelWidth>0 ? element.name : ''"
       @click.native.stop="handleSelectWidget(index)"
   >
+        
         <template v-if="element.type == 'title'">
           <el-input 
             v-model="element.options.defaultValue"
@@ -18,7 +19,11 @@
 
         <template v-if="element.type == 'sign'">
           <div class="sign_com">
-            <div class="sign_cont"></div>
+            <div 
+              class="sign_cont"
+              :style="{'height':element.options.height+'px'}"
+            >
+            </div>
           </div>
         </template>
 
@@ -345,7 +350,6 @@ export default {
 }
 .sign_com{
   .sign_cont{
-    min-height:100px;
     border-radius: 4px;
     border: 1px solid #DCDFE6;
   }

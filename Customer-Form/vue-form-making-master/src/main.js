@@ -38,10 +38,11 @@ Vue.config.lang = 'zh-CN'
 
 Vue.use(ElementUI, { size: 'small' })
 
-// import 'form-making/dist/FormMaking.css'
-// import FormMaking from 'form-making'
+
 import FormMaking from './index'
 Vue.use(FormMaking)
+
+import '@/assets/css/common.scss';
 
 Vue.config.productionTip = false
 

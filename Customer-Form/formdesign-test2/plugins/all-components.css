@@ -1,0 +1,199 @@
+/*表单属性*/
+.formProperty h6{
+    font-weight: bold;
+    line-height: 24px;
+}
+/*按钮*/
+.allBody .components-btn{
+    border: 1px solid #409EFF;
+    padding: 4px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    color: #409eff;
+}
+.allBody .components-btn:hover{
+    background: #409eff;
+    color: #fff;
+}
+.allBody{
+    padding-bottom: 20px;
+}
+    /*各个标题*/
+.allBody h6{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 30px;
+}
+.allBody h6>span,
+.allBody .text_p{
+    color: #999;
+    font-size: 12px;
+    font-weight: normal;
+}
+/*divBox*/
+.divBox{
+    width: 98%;
+    box-sizing: border-box;
+}
+/*隐藏*/
+.moduleBox{
+    display: none;
+}
+/*控件宽度占比*/
+.allBody .moduleLength{
+    font-size: 0;
+}
+.allBody .moduleLength li{
+    width: 24%;
+    font-size: 12px;
+    position: relative;
+    display: inline-block;
+    border: 1px solid #ddd;
+    text-align: center;
+    line-height: 24px;
+    margin-right: -1px;
+    margin-top: 2px;
+    cursor: pointer;
+}
+.allBody .moduleLength li.active{
+    border-color: #409EFF;
+    z-index: 99;
+}
+/*样式风格*/
+.allBody .cssStyle{
+    font-size: 0;
+}
+.allBody .cssStyle label{
+    font-size: 14px;
+    width: 23%;
+    display: inline-block;
+}
+.allBody .cssStyle label>span,
+.allBody .cssStyle label>input{
+    vertical-align: middle;
+}
+
+/*逻辑设置*/
+.allBody  .selectBtn{
+    text-align: center;
+    font-size: 0;
+
+}
+.allBody .logicBox{
+    position: relative;
+    z-index: 999;
+   /* padding-top: 6px;
+    border: 1px solid #ddd;*/
+}
+.allBody .setBtn{
+    display: inline-block;
+    border: 1px solid transparent;
+    padding: 2px 6px ;
+    background-color: #409eff;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+.allBody .setBtn:hover{
+    background-color: #66b1ff;
+    border-color: #66b1ff;
+
+}
+.closefixedBox{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 20px;
+    height: 20px;
+    z-index: 9999;
+    border:1px solid #f56c6c;
+    color: #f56c6c;
+    text-align: center;
+    font-size: 20px;
+    line-height: 18px;
+    cursor: pointer;
+    background: #fff;
+}
+.closefixedBox:hover{
+    background-color: #f56c6c;
+    color: #fff;
+}
+/*逻辑设置--伸缩框*/
+.allBody .fixedBox{
+    position: fixed;
+    bottom: 10px;
+    right: -810px;
+    width: 800px;
+    height: 400px;
+    border: 1px solid #ddd;
+    z-index: 999;
+    background: #fff;
+    box-shadow: 0 0 5px #eee;
+    border-radius: 4px;
+    transition: all 0.5s;
+
+}
+.allBody .fixedBox.toggleBox{
+    right: 4px;
+}
+
+/*是否按钮*/
+.trueFalse{
+    font-size: 0;
+}
+.trueFalse>span{
+    display: inline-block;
+    font-size: 14px;
+    position: relative;
+    margin-right: -1px;
+    border: 1px solid #ddd;
+    padding: 2px 6px;
+    cursor: pointer;
+    z-index: 1;
+}
+.trueFalse>span.btnActive,
+.trueFalse>span:hover{
+    background: #409eff;
+    color: #fff;
+    border-color: #409eff;
+}
+
+/*单选框*/
+.allBody .setBtn{
+    display: inline-block;
+    border: 1px solid #409eff;
+    background: #409eff;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin: 10px 0 4px;
+    cursor: pointer;
+}
+.displayBox{
+    display: none;
+}
+.displayBox.customData{
+    display: block;
+}
+/*文本*/
+#formScripts #scripts .mini-textbox-border{
+    height: 100%;
+    box-sizing: border-box;
+}
+
+
+/*tabs*/
+.tabsToolbar>a.mini-button{
+    padding:0 4px;
+    margin-right: 4px;
+}
+.tabsToolbar>a.mini-button:hover{
+    padding:0 4px;
+}
+.tabsToolbar>a.mini-button:last-child{
+    margin-right: 0;
+}

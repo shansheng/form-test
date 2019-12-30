@@ -1,0 +1,51 @@
+.textcen{
+    text-align:center;
+    .el-input__inner{
+        text-align:center;
+    }
+}
+.textlf{
+    text-align:left;
+}
+.textrg{
+    text-align:right;
+}
+.redColor{
+    color:red;
+    .el-input__inner{
+        color:red;
+    }
+}
+.blackColor{
+    color:black;
+    .el-input__inner{
+        color:black;
+    }
+}
+
+// 签章高度不固定
+.el-row{
+    .el-col{
+        margin-bottom:-2000px;
+        padding-bottom:2000px;
+        .generate_form_item{
+            height:100%;
+            .el-form-item {
+                height:100%;
+                .el-form-item__content{
+                    height:100%;
+                    .el_form_sign{
+                        height:100%;
+                        .el_form_label{
+                            height:100%;
+                        }
+                        .sign_com{
+                            height:100%;
+                        }
+                    }
+                }
+            }
+        }
+      
+    }
+  }

@@ -6,26 +6,27 @@ export const basicComponents = [
     no_bor:true,//没有边框
     options: {
       width: '100%',
-      height:'65',
+      height:'67',
       mat:'',//上边距
       alignTxt:'center',//内容对齐方式
-      labelColor:'',//标题颜色
-      contColor:'',//内容颜色
+      contColor:'red',//内容颜色
       defaultValue: '',
       required: false,
       dataType: 'string',
       pattern: '',
-      placeholder: '',
+      placeholder: '请输入大标题',
       disabled: false,
-      fontSize:'16',
+      fontSize:'40',
     }
   },
   {
     type: 'sign',
     icon: 'icon-input',
+    custom_label:true,//自定义标题
     options: {
+      titleWidth: '',
       width: '100%',
-      height:'65',
+      height:'220',
       mat:'',//上边距
       alignTxt:'center',//内容对齐方式
       labelColor:'',//标题颜色
@@ -36,12 +37,13 @@ export const basicComponents = [
       pattern: '',
       placeholder: '',
       disabled: false,
-      fontSize:'16',
+      fontSize:'16'
     }
   },
   {
     type: 'input',
     icon: 'icon-input',
+    custom_label:true,//自定义标题
     options: {
       width: '100%',
       mat:'',//上边距
@@ -56,6 +58,7 @@ export const basicComponents = [
   {
     type: 'textarea',
     icon: 'icon-diy-com-textarea',
+    custom_label:true,//自定义标题
     options: {
       width: '100%',
       defaultValue: '',
@@ -243,21 +246,21 @@ export const basicComponents = [
       multiple: false,
       disabled: false,
       clearable: false,
-      placeholder: '',
+      placeholder: '请选择',
       required: false,
       showLabel: false,
       width: '100%',
       alignTxt:'center',//内容对齐方式
-      labelColor:'',//标题颜色
-      contColor:'',//内容颜色
+      labelColor:'red',//标题颜色
+      contColor:'red',//内容颜色
       options: [
         {
-          value: 'Option 1'
+          value: '紧急'
         },
         {
-          value: 'Option 2'
+          value: '一般'
         },{
-          value: 'Option 3'
+          value: '不紧急'
         }
       ],
       remote: false,

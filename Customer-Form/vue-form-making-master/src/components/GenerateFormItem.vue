@@ -1,29 +1,38 @@
 <template>
-  <div>
+  <div class="generate_form_item">
     <el-form-item 
       :prop="widget.model"
       :style="{'margin-top':widget.options.mat+'px'}"
       :class="{'gen_item_nolabel':widget.no_label,'gen_item_nobor':widget.no_bor}"
     >
-      <div class="el_form_custom">
-        <span class="el_form_label" :style="{width:labelWidth+'px',left:'-'+labelWidth+'px'}" v-if="labelWidth>0 && !widget.no_label">
-          <i class="el_title" :class="{'el_title_cen':alignType=='center','el_title_fl':alignType=='left','el_title_fr':alignType=='right'}">{{widget.name}}</i>
+      <div class="el_form_custom" :class="{'el_form_sign':widget.type=='sign'}">
+        <span class="el_form_label" :style="{width:labelWidth+'px',left:'-'+labelWidth+'px'}" v-if="widget.custom_label">
+          <i class="el_title" :class="{'textcen':alignType=='center','textlf':alignType=='left','textrg':alignType=='right','redColor':widget.options.labelColor=='red','blackColor':widget.options.labelColor=='black'}">{{widget.name}}</i>
         </span>
 
-        <template v-if="widget.type == 'title'" >
+        <template v-if="widget.type == 'title'">
           <el-input 
             :type="widget.options.dataType"
             v-model="dataModel"
             :disabled="widget.options.disabled"
             :placeholder="widget.options.placeholder"
             :style="{width: widget.options.width,height:widget.options.height+'px','font-size':widget.options.fontSize+'px'}"
-            :class="{'custom_h':widget.options.height,'align_fl':widget.options.alignTxt=='left','align_cen':widget.options.alignTxt=='center','align_fr':widget.options.alignTxt=='right','red_color':widget.options.contColor=='red','black_color':widget.options.contColor=='black'}"
+            :class="{'custom_h':widget.options.height,'textlf':widget.options.alignTxt=='left','textcen':widget.options.alignTxt=='center','textrg':widget.options.alignTxt=='right','redColor':widget.options.contColor=='red','blackColor':widget.options.contColor=='black'}"
           ></el-input>
         </template>
 
-        <template v-if="widget.type == 'sign'" >
-          <div class="sign_com">
-            <div class="sign_cont" @click="dialogSign = true"></div>
+        <template v-if="widget.type == 'sign'">
+          <div class="sign_com" @click="dialogSign = true">
+            <div 
+              class="sign_cont"
+              :class="{'redColor':widget.options.contColor=='red','blackColor':widget.options.contColor=='black'}"
+            >
+              <div class="sign_item" v-for="(item,index) in signList" :key="index">
+                <div>{{item.cont}}</div>
+                <div class="sign_cur">{{item.sign_cur}}</div>
+                <div class="sign_time">{{item.time}}</div>
+              </div>
+            </div>
           </div>  
         </template>
 
@@ -167,7 +176,7 @@
           <div class="gen_select_two">
             <div 
               class="gen_select_two_tl"
-              :class="{'gen_select_two_tl_fl':alignType=='left','gen_select_two_tl_cen':alignType=='center','gen_select_two_tl_fr':alignType=='right'}"
+              :class="{'textcen':alignType=='center','textlf':alignType=='left','textrg':alignType=='right','redColor':widget.options.labelColor=='red','blackColor':widget.options.labelColor=='black'}"
             >{{widget.name}}</div>
             <el-select
               v-model="dataModel"
@@ -177,6 +186,7 @@
               :placeholder="widget.options.placeholder"
               :style="{width: widget.options.width}"
               :filterable="widget.options.filterable"
+              :class="{'textcen':alignType=='center','textlf':alignType=='left','textrg':alignType=='right','redColor':widget.options.contColor=='red','blackColor':widget.options.contColor=='black'}"
             >
               <el-option v-for="item in (widget.options.remote ? widget.options.remoteOptions : widget.options.options)" :key="item.value" :value="item.value" :label="widget.options.showLabel || widget.options.remote?item.label:item.value"></el-option>
             </el-select>
@@ -253,21 +263,15 @@
     </el-form-item>
 
     <!-- 签名 -->
-    <el-dialog title="收货地址" :visible.sync="dialogSign">
-      <el-form :model="form">
-        <el-form-item label="活动名称" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="活动区域" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
+    <el-dialog title="审批" :visible.sync="dialogSign" :append-to-body="true" width="300px">
+      <el-form ref="signForm" :model="signForm" :rules="signRule" label-width="100px">
+        <el-form-item label="审批内容" prop="signCont">
+          <el-input v-model="signForm.signCont" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogSign = false">取 消</el-button>
-        <el-button type="primary" @click="dialogSign = false">确 定</el-button>
+        <el-button type="primary" @click="signSure('signForm')">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -289,17 +293,23 @@ export default {
   data () {
     return {
       dataModel: this.models[this.widget.model],
-      dialogSign:false,//签名
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+      dialogSign:false,//审批
+      sign_cur:'王晓宇',//当前操作人
+      signForm: {
+        signCont:''
       },
+      signRule: {
+        signCont: [
+          { required: true, message: '请输入审批', trigger: 'blur' }
+        ]
+      },
+      signList:[
+        // {
+        //   cont:'',
+        //   sign_cur:'',
+        //   time:''
+        // }
+      ]
     }
   },
   created () {
@@ -324,9 +334,23 @@ export default {
     }
   },
   methods: {
-    //签名
-    addSign(){
+    //审批
+    signSure(formName){
       let vm=this;
+      vm.$refs[formName].validate((valid) => {
+        if (valid) {
+          console.log('submit!');
+          vm.signList.push({
+            cont:vm.signForm.signCont,
+            sign_cur:vm.sign_cur,
+            time:new Date().getTime()
+          })
+          vm.dialogSign=false;
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
     }
   },
   watch: {
@@ -366,15 +390,6 @@ export default {
       width:100%;
       transform:translateY(-50%);
       font-style:normal;
-      &.el_title_cen{
-        text-align:center;
-      }
-      &.el_title_fl{
-        text-align:left;
-      }
-      &.el_title_fr{
-        text-align:right;
-      }
     }
   }
 }
@@ -390,15 +405,6 @@ export default {
     
     .gen_select_two_tl{
       border-bottom:1px solid red;
-      &.gen_select_two_tl_fl{
-        text-align:left;
-      }
-      &.gen_select_two_tl_cen{
-        text-align:center;
-      }
-      &.gen_select_two_tl_fr{
-        text-align:right;
-      }
     }
     /deep/ .el-select{
       width:100%;
@@ -418,36 +424,23 @@ export default {
     height:100%;
   }
 }
-.align_fl{
-  /deep/ .el-input__inner{
-    text-align:left;
-  }
-}
-.align_cen{
-  /deep/ .el-input__inner{
-    text-align:center;
-  }
-}
-.align_fr{
-  /deep/ .el-input__inner{
-    text-align:right;
-  }
-}
-.red_color{
-  /deep/ .el-input__inner{
-    color:red;
-  }
-}
-.black_color{
-  /deep/ .el-input__inner{
-    color:black;
-  }
-}
 .sign_com{
   .sign_cont{
     min-height:100px;
     cursor: pointer;
+    padding:2px;
+    overflow:hidden;
+    .sign_item{
+      margin-bottom:5px;
+      line-height:15px;
+      .sign_cur,.sign_time{
+        padding-left:50px;
+      }
+    }
   }
 }
+
+
+
 </style>
 

@@ -83,6 +83,7 @@ export default {
         title: 'Component Attribute',
         model: 'ID',
         name: 'Name',
+        titleWidth:'titleWidth',
         width: 'Width',
         height: 'Height',
         mat:'marginTop',

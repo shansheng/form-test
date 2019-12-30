@@ -7,9 +7,15 @@
       <el-form-item :label="$t('fm.config.widget.name')" v-if="data.type!='grid' && !data.no_label">
         <el-input v-model="data.name"></el-input>
       </el-form-item>
+
+      <el-form-item :label="$t('fm.config.widget.titleWidth')" v-if="Object.keys(data.options).indexOf('titleWidth')>=0">
+        <el-input v-model="data.options.titleWidth"></el-input>
+        
+      </el-form-item>
       <el-form-item :label="$t('fm.config.widget.width')" v-if="Object.keys(data.options).indexOf('width')>=0">
         <el-input v-model="data.options.width"></el-input>
       </el-form-item>
+      
 
       <el-form-item :label="$t('fm.config.widget.height')" v-if="Object.keys(data.options).indexOf('height')>=0">
         <el-input v-model="data.options.height"></el-input>
@@ -23,7 +29,7 @@
       </el-form-item>
 
       <!-- 标题颜色 -->
-      <template v-if="data.options.labelColor">
+      <template v-if="Object.keys(data.options).indexOf('labelColor')>=0">
         <el-form-item :label="$t('fm.config.widget.labelColor')">
           <el-select v-model="data.options.labelColor">
             <el-option value="red"></el-option>
@@ -34,7 +40,7 @@
 
 
       <!-- 内容颜色 -->
-      <template v-if="data.options.contColor">
+      <template v-if="Object.keys(data.options).indexOf('contColor')>=0">
         <el-form-item :label="$t('fm.config.widget.contColor')">
           <el-select v-model="data.options.contColor">
             <el-option value="red"></el-option>
