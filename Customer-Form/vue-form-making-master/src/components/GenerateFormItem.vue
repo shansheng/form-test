@@ -173,9 +173,9 @@
         </template>
 
         <template v-if="widget.type == 'select_two'">
-          <div class="gen_select_two">
+          <div :class="{'borderRed':widget.options.borderColor=='red','borderBlack':widget.options.borderColor=='black'}">
             <div 
-              class="gen_select_two_tl"
+              class="bor_bom"
               :class="{'textcen':alignType=='center','textlf':alignType=='left','textrg':alignType=='right','redColor':widget.options.labelColor=='red','blackColor':widget.options.labelColor=='black'}"
             >{{widget.name}}</div>
             <el-select
@@ -399,13 +399,6 @@ export default {
     border-left:0 !important;
   }
   .el_form_custom{
-    .gen_select_two{
-      border:1px solid red;
-    }
-    
-    .gen_select_two_tl{
-      border-bottom:1px solid red;
-    }
     /deep/ .el-select{
       width:100%;
     }

@@ -77,6 +77,13 @@ export default {
         },
         labelWidth: 'Label Width',
         size: 'Size',
+        //边框颜色
+        borderColor:{
+          title:'borderColor',
+          red:'red',
+          black:'black',
+          noneColor:'none'
+        },
         customClass: 'Custom Class'
       },
       widget: {

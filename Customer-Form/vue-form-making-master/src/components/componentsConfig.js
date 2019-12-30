@@ -29,8 +29,9 @@ export const basicComponents = [
       height:'220',
       mat:'',//上边距
       alignTxt:'center',//内容对齐方式
-      labelColor:'',//标题颜色
-      contColor:'',//内容颜色
+      labelColor:'red',//标题颜色
+      contColor:'black',//内容颜色
+      borderColor:'red',//边框颜色
       defaultValue: '',
       required: false,
       dataType: 'string',
@@ -253,6 +254,7 @@ export const basicComponents = [
       alignTxt:'center',//内容对齐方式
       labelColor:'red',//标题颜色
       contColor:'red',//内容颜色
+      borderColor:'red',//边框颜色
       options: [
         {
           value: '紧急'

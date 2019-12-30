@@ -77,6 +77,13 @@ export default {
         },
         labelWidth: '整体表单标签宽度',
         size: '组件尺寸',
+        //边框颜色
+        borderColor:{
+          title:'边框颜色',
+          red:'红色',
+          black:'黑色',
+          noneColor:'透明'
+        },
         customClass: '自定义Class'
       },
       widget: {

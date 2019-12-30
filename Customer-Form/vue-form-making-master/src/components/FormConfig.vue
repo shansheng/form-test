@@ -10,6 +10,15 @@
         </el-radio-group>
       </el-form-item>
 
+      <el-form-item :label="$t('fm.config.form.borderColor.title')">
+        <el-radio-group v-model="data.borderColor">
+          <el-radio-button label="red">{{$t('fm.config.form.borderColor.red')}}</el-radio-button>
+          <el-radio-button label="black">{{$t('fm.config.form.borderColor.black')}}</el-radio-button>
+          <!-- <el-radio-button label="top">{{$t('fm.config.form.labelPosition.top')}}</el-radio-button> -->
+          <el-radio-button label="noneColor">{{$t('fm.config.form.borderColor.noneColor')}}</el-radio-button>
+        </el-radio-group>
+      </el-form-item>
+
       <el-form-item :label="$t('fm.config.form.labelWidth')">
         <el-input-number v-model="data.labelWidth" :min="0" :max="200" :step="10"></el-input-number>
       </el-form-item>

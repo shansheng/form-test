@@ -22,6 +22,18 @@
         color:black;
     }
 }
+.borderRed{
+    border:1px solid red;
+    .bor_bom{
+        border-bottom:1px solid red;
+    }
+}
+.borderBlack{
+    border:1px solid black;
+    .bor_bom{
+        border-bottom:1px solid black;
+    }
+}
 
 // 签章高度不固定
 .el-row{

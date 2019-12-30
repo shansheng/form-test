@@ -225,7 +225,8 @@ export default {
         config: {
           labelWidth: 100,
           labelPosition: 'center',
-          size: 'small'
+          size: 'small',
+          borderColor:'red'
         },
       },
       configTab: 'widget',
