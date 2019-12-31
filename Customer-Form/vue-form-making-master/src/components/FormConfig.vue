@@ -11,10 +11,9 @@
       </el-form-item>
 
       <el-form-item :label="$t('fm.config.form.borderColor.title')">
-        <el-radio-group v-model="data.borderColor">
+        <el-radio-group v-model="data.borderColor" @change="change">
           <el-radio-button label="red">{{$t('fm.config.form.borderColor.red')}}</el-radio-button>
           <el-radio-button label="black">{{$t('fm.config.form.borderColor.black')}}</el-radio-button>
-          <!-- <el-radio-button label="top">{{$t('fm.config.form.labelPosition.top')}}</el-radio-button> -->
           <el-radio-button label="noneColor">{{$t('fm.config.form.borderColor.noneColor')}}</el-radio-button>
         </el-radio-group>
       </el-form-item>
@@ -36,6 +35,11 @@
 
 <script>
 export default {
-  props: ['data']
+  props: ['data'],
+  methods:{
+    change(){
+      console.log(this.data.borderColor);
+    }
+  }
 }
 </script>

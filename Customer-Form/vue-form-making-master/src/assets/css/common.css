@@ -31,19 +31,57 @@
 }
 
 .borderRed {
-  border: 1px solid red;
+  border-left: 1px solid red;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
+}
+
+.borderRed.bort {
+  border-top: 1px solid red;
 }
 
 .borderRed .bor_bom {
   border-bottom: 1px solid red;
 }
 
+.borderRed .el-form-item__content {
+  border-left: 1px solid red;
+}
+
 .borderBlack {
-  border: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.borderBlack.bort {
+  border-top: 1px solid black;
 }
 
 .borderBlack .bor_bom {
   border-bottom: 1px solid black;
+}
+
+.borderBlack .el-form-item__content {
+  border-left: 1px solid black;
+}
+
+.borderNode {
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.borderNode.bort {
+  border-top: 1px solid transparent;
+}
+
+.borderNode .bor_bom {
+  border-bottom: 1px solid transparent;
+}
+
+.borderNode .el-form-item__content {
+  border-left: 1px solid transparent;
 }
 
 .el-row .el-col {
@@ -55,22 +93,22 @@
   height: 100%;
 }
 
-.el-row .el-col .generate_form_item .el-form-item {
+.el-row .el-col .generate_form_item .el-form-item.signH {
   height: 100%;
 }
 
-.el-row .el-col .generate_form_item .el-form-item .el-form-item__content {
+.el-row .el-col .generate_form_item .el-form-item.signH .el-form-item__content {
   height: 100%;
 }
 
-.el-row .el-col .generate_form_item .el-form-item .el-form-item__content .el_form_sign {
+.el-row .el-col .generate_form_item .el-form-item.signH .el-form-item__content .el_form_sign {
   height: 100%;
 }
 
-.el-row .el-col .generate_form_item .el-form-item .el-form-item__content .el_form_sign .el_form_label {
+.el-row .el-col .generate_form_item .el-form-item.signH .el-form-item__content .el_form_sign .el_form_label {
   height: 100%;
 }
 
-.el-row .el-col .generate_form_item .el-form-item .el-form-item__content .el_form_sign .sign_com {
+.el-row .el-col .generate_form_item .el-form-item.signH .el-form-item__content .el_form_sign .sign_com {
   height: 100%;
 }

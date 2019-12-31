@@ -15,12 +15,13 @@
             :gutter="item.options.gutter ? item.options.gutter : 0"
             :justify="item.options.justify"
             :align="item.options.align"
+            :style="{'margin-top':item.options.mat+'px'}"
           >
             <el-col v-for="(col, colIndex) in item.columns" :key="colIndex" :span="col.span">
               
 
               <template v-for="citem in col.list" >
-                <el-form-item v-if="citem.type=='blank'" :prop="citem.model" :key="citem.key">
+                <el-form-item v-if="citem.type=='blank'" :prop="citem.model" :key="citem.key" :class="{'borderRed':data.config.borderColor=='red','borderBlack':data.config.borderColor=='black','borderNode':data.config.borderColor=='noneColor'}">
                   <slot :name="citem.model" :model="models"></slot>
                 </el-form-item>
                 <genetate-form-item v-else 
@@ -29,8 +30,7 @@
                   :remote="remote" 
                   :rules="rules" 
                   :widget="citem"
-                  :labelWidth="data.config.labelWidth"
-                  :alignType="data.config.labelPosition"
+                  :commonConfig="data.config"
                   @input-change="onInputChange">
                 </genetate-form-item>
               </template>
@@ -39,7 +39,7 @@
         </template>
 
         <template v-else-if="item.type == 'blank'">
-          <el-form-item :prop="item.model" :key="item.key">
+          <el-form-item :prop="item.model" :key="item.key" :class="{'borderRed':data.config.borderColor=='red','borderBlack':data.config.borderColor=='black','borderNode':data.config.borderColor=='noneColor'}">
             <slot :name="item.model" :model="models"></slot>
           </el-form-item>
         </template>
@@ -49,9 +49,8 @@
             :key="item.key" 
             :models.sync="models" 
             :rules="rules" 
-            :widget="item" 
-            :labelWidth="data.config.labelWidth"
-            :alignType="data.config.labelPosition"
+            :widget="item"
+            :commonConfig="data.config"
             @input-change="onInputChange"
             :remote="remote">
           </genetate-form-item>
@@ -79,6 +78,7 @@ export default {
     }
   },
   created () {
+    console.log(this.data);
     this.generateModle(this.data.list)
   },
   mounted () {
@@ -208,13 +208,10 @@ export default {
     text-align: left;
   }
   .el-form-item{
-    border:1px solid red;
+    // border:1px solid red;
     margin-bottom:0;
-    &:not(:first-child){
-      border-top:0;
-    }
     .el-form-item__content{
-      border-left:1px solid red;
+      // border-left:1px solid red;
     }
   }
 }

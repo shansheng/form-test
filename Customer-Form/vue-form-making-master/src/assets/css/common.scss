@@ -23,15 +23,48 @@
     }
 }
 .borderRed{
-    border:1px solid red;
+    border-left:1px solid red;
+    border-right:1px solid red;
+    border-bottom:1px solid red;
+    &.bort{
+        border-top:1px solid red;
+    }
     .bor_bom{
         border-bottom:1px solid red;
     }
+    .el-form-item__content{
+        border-left:1px solid red;
+    }
+    // &:not(:first-child){
+    //     border-top:0;
+    // }
 }
 .borderBlack{
-    border:1px solid black;
+    border-left:1px solid black;
+    border-right:1px solid black;
+    border-bottom:1px solid black;
+    &.bort{
+        border-top:1px solid black;
+    }
     .bor_bom{
         border-bottom:1px solid black;
+    }
+    .el-form-item__content{
+        border-left:1px solid black;
+    }
+}
+.borderNode{
+    border-left:1px solid transparent;
+    border-right:1px solid transparent;
+    border-bottom:1px solid transparent;
+    &.bort{
+        border-top:1px solid transparent;
+    }
+    .bor_bom{
+        border-bottom:1px solid transparent;
+    }
+    .el-form-item__content{
+        border-left:1px solid transparent;
     }
 }
 
@@ -42,7 +75,7 @@
         padding-bottom:2000px;
         .generate_form_item{
             height:100%;
-            .el-form-item {
+            .el-form-item.signH {
                 height:100%;
                 .el-form-item__content{
                     height:100%;

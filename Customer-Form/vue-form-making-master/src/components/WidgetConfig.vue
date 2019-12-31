@@ -10,8 +10,14 @@
 
       <el-form-item :label="$t('fm.config.widget.titleWidth')" v-if="Object.keys(data.options).indexOf('titleWidth')>=0">
         <el-input v-model="data.options.titleWidth"></el-input>
-        
       </el-form-item>
+
+      <el-form-item :label="$t('fm.config.widget.titlepad')" v-if="data.options.titleWidth>0 && Object.keys(data.options).indexOf('titlepad')>=0">
+        <el-input v-model="data.options.titlepad"></el-input>
+        <!-- <el-input v-model="data.options.titleWidth"></el-input> -->
+      </el-form-item>
+
+      
       <el-form-item :label="$t('fm.config.widget.width')" v-if="Object.keys(data.options).indexOf('width')>=0">
         <el-input v-model="data.options.width"></el-input>
       </el-form-item>
@@ -22,6 +28,13 @@
       </el-form-item>
       <el-form-item :label="$t('fm.config.widget.mat')" v-if="Object.keys(data.options).indexOf('mat')>=0">
         <el-input v-model="data.options.mat"></el-input>
+      </el-form-item>
+      <el-form-item :label="$t('fm.config.widget.bort')" v-if="data.options.bort">
+        <!-- <el-input v-model="data.options.bort"></el-input> -->
+        <el-radio-group v-model="data.options.bort">
+          <el-radio-button :label="true">{{$t('fm.config.widget.bortyes')}}</el-radio-button>
+          <el-radio-button :label="false">{{$t('fm.config.widget.bortno')}}</el-radio-button>
+        </el-radio-group>
       </el-form-item>
 
       <el-form-item :label="$t('fm.config.widget.fontSize')" v-if="Object.keys(data.options).indexOf('fontSize')>=0">

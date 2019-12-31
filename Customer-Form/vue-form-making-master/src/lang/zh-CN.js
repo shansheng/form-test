@@ -25,6 +25,7 @@ export default {
         cascader: '级联选择器',
         table: '子表单',
         grid: '栅格布局',
+        vertical:'竖向分栏',
         tabs: '标签页',
         divider: '分割线'
       },
@@ -91,9 +92,13 @@ export default {
         model: '字段标识',
         name: '标题',
         titleWidth:'标题宽度',
+        titlepad:'标题两边留白',
         width: '内容宽度',
         height: '高度',
         mat:'上边距',
+        bort:'是否有上边框',
+        bortyes:'是',
+        bortno:'否',
         fontSize:'字体大小',
         labelColor:'标题颜色',//标题颜色
         contColor:'内容颜色',//内容颜色

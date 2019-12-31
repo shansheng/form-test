@@ -140,6 +140,7 @@
           </template>
         </cus-dialog>
 
+        <!-- html -->
         <cus-dialog
           :visible="codeVisible"
           @on-close="codeVisible = false"
@@ -296,7 +297,7 @@ export default {
           name: this.$t(`fm.components.fields.${item.type}`)
         }
       })
-      console.log(this.basicComponents);
+      console.log(this.layoutComponents);
     },
     handleGoGithub () {
       window.location.href = 'https://github.com/GavinZhuLei/vue-form-making'
@@ -347,9 +348,12 @@ export default {
         this.jsonCopyValue = JSON.stringify(this.widgetForm)
       })
     },
+    //html
     handleGenerateCode () {
-      this.codeVisible = true
+      this.codeVisible = true;
+      console.log(this.widgetForm)
       this.htmlTemplate = generateCode(JSON.stringify(this.widgetForm))
+      console.log(this.htmlTemplate)
       this.$nextTick(() => {
         const editor = ace.edit('codeeditor')
         editor.session.setMode("ace/mode/html")

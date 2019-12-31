@@ -1,13 +1,16 @@
 <template>
   <div class="generate_form_item">
+
+    <!-- :style="{'margin-top':widget.options.mat+'px'}" -->
     <el-form-item 
       :prop="widget.model"
-      :style="{'margin-top':widget.options.mat+'px'}"
-      :class="{'gen_item_nolabel':widget.no_label,'gen_item_nobor':widget.no_bor}"
+      :style="{'padding-left':widget.options.titleWidth>0 ? Number(Number(widget.options.titleWidth)+Number(widget.options.titlepad)*2)+'px' :''}"
+      :class="{'gen_item_nolabel':widget.no_label,'gen_item_nobor':widget.no_bor,'borderRed':commonConfig.borderColor=='red','borderBlack':commonConfig.borderColor=='black','borderNode':commonConfig.borderColor=='noneColor','signH':widget.type == 'sign','bort':widget.options.bort,'titleWidth':widget.options.titleWidth>0}"
     >
+    
       <div class="el_form_custom" :class="{'el_form_sign':widget.type=='sign'}">
-        <span class="el_form_label" :style="{width:labelWidth+'px',left:'-'+labelWidth+'px'}" v-if="widget.custom_label">
-          <i class="el_title" :class="{'textcen':alignType=='center','textlf':alignType=='left','textrg':alignType=='right','redColor':widget.options.labelColor=='red','blackColor':widget.options.labelColor=='black'}">{{widget.name}}</i>
+        <span class="el_form_label" :style="{width:widget.options.titleWidth>0 ? widget.options.titleWidth+'px' : commonConfig.labelWidth+'px',padding:'0 '+widget.options.titlepad+'px',left:widget.options.titleWidth>0 ? '-'+Number(Number(widget.options.titleWidth)+Number(widget.options.titlepad)*2)+'px' :'-'+commonConfig.labelWidth+'px'}" v-if="widget.custom_label">
+          <i class="el_title" :class="{'textcen':commonConfig.labelPosition=='center','textlf':commonConfig.labelPosition=='left','textrg':commonConfig.labelPosition=='right','redColor':widget.options.labelColor=='red','blackColor':widget.options.labelColor=='black'}">{{widget.name}}</i>
         </span>
 
         <template v-if="widget.type == 'title'">
@@ -24,6 +27,7 @@
         <template v-if="widget.type == 'sign'">
           <div class="sign_com" @click="dialogSign = true">
             <div 
+              :style="{'min-height':widget.options.height>0 ? widget.options.height+'px':'100px'}"
               class="sign_cont"
               :class="{'redColor':widget.options.contColor=='red','blackColor':widget.options.contColor=='black'}"
             >
@@ -173,10 +177,10 @@
         </template>
 
         <template v-if="widget.type == 'select_two'">
-          <div :class="{'borderRed':widget.options.borderColor=='red','borderBlack':widget.options.borderColor=='black'}">
+          <div :class="{'borderRed':commonConfig.borderColor=='red','borderBlack':commonConfig.borderColor=='black','borderNode':commonConfig.borderColor=='noneColor','bort':widget.options.bort}">
             <div 
               class="bor_bom"
-              :class="{'textcen':alignType=='center','textlf':alignType=='left','textrg':alignType=='right','redColor':widget.options.labelColor=='red','blackColor':widget.options.labelColor=='black'}"
+              :class="{'textcen':commonConfig.labelPosition=='center','textlf':commonConfig.labelPosition=='left','textrg':commonConfig.labelPosition=='right','redColor':widget.options.labelColor=='red','blackColor':widget.options.labelColor=='black'}"
             >{{widget.name}}</div>
             <el-select
               v-model="dataModel"
@@ -186,7 +190,7 @@
               :placeholder="widget.options.placeholder"
               :style="{width: widget.options.width}"
               :filterable="widget.options.filterable"
-              :class="{'textcen':alignType=='center','textlf':alignType=='left','textrg':alignType=='right','redColor':widget.options.contColor=='red','blackColor':widget.options.contColor=='black'}"
+              :class="{'textcen':commonConfig.labelPosition=='center','textlf':commonConfig.labelPosition=='left','textrg':commonConfig.labelPosition=='right','redColor':widget.options.contColor=='red','blackColor':widget.options.contColor=='black'}"
             >
               <el-option v-for="item in (widget.options.remote ? widget.options.remoteOptions : widget.options.options)" :key="item.value" :value="item.value" :label="widget.options.showLabel || widget.options.remote?item.label:item.value"></el-option>
             </el-select>
@@ -286,7 +290,8 @@
 import FmUpload from './Upload'
 
 export default {
-  props: ['widget', 'models', 'rules', 'remote','labelWidth','alignType'],
+  // props: ['widget', 'models', 'rules', 'remote','labelWidth','alignType','commonConfig'],
+  props: ['widget', 'models', 'rules', 'remote','commonConfig'],
   components: {
     FmUpload
   },
@@ -313,8 +318,8 @@ export default {
     }
   },
   created () {
-    console.log(this.labelWidth)
-    console.log(this.widget)
+    // console.log(this.commonConfig)
+    // console.log(this.widget)
     if (this.widget.options.remote && this.remote[this.widget.options.remoteFunc]) {
       this.remote[this.widget.options.remoteFunc]((data) => {
         this.widget.options.remoteOptions = data.map(item => {
@@ -387,7 +392,8 @@ export default {
     .el_title{
       position:absolute;
       top:50%;
-      width:100%;
+      // width:100%;
+      display:block;
       transform:translateY(-50%);
       font-style:normal;
     }
@@ -421,15 +427,22 @@ export default {
   .sign_cont{
     min-height:100px;
     cursor: pointer;
-    padding:2px;
+    padding:5px;
     overflow:hidden;
     .sign_item{
-      margin-bottom:5px;
-      line-height:15px;
+      margin-bottom:10px;
+      line-height:20px;
       .sign_cur,.sign_time{
         padding-left:50px;
       }
     }
+  }
+}
+
+//标题宽度
+.titleWidth{
+  /deep/ .el-form-item__content{
+    margin-left:0 !important;
   }
 }
 

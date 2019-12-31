@@ -25,6 +25,7 @@ export default {
         cascader: 'Cascader',
         table: 'Sub-table',
         grid: 'Grid',
+        vertical:'Vertical',
         tabs: 'Tabs',
         divider: 'Divider'
       },
@@ -91,9 +92,13 @@ export default {
         model: 'ID',
         name: 'Name',
         titleWidth:'titleWidth',
+        titlepad:'titlepad',
         width: 'Width',
         height: 'Height',
         mat:'marginTop',
+        bort:"bort",
+        bortyes:'yes',
+        bortno:'no',
         fontSize:'fontSize',
         labelColor:'labelColor',//标题颜色
         contColor:'contColor',//内容颜色

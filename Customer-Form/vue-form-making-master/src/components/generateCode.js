@@ -1,8 +1,8 @@
-function findRemoteFunc (list, funcList, tokenFuncList, blankList) {
+function findRemoteFunc (list, funcList, tokenFuncList, blankList,titleList,select_twoList) {
   for (let i = 0; i < list.length; i++) {
     if (list[i].type == 'grid') {
       list[i].columns.forEach(item => {
-        findRemoteFunc(item.list, funcList, tokenFuncList, blankList)
+        findRemoteFunc(item.list, funcList, tokenFuncList, blankList,titleList,select_twoList)
       })
     } else {
       if (list[i].type == 'blank') {
@@ -20,6 +20,14 @@ function findRemoteFunc (list, funcList, tokenFuncList, blankList) {
             model: list[i].model
           })
         }
+      }else if (list[i].type == 'title') {
+        if (list[i].model) {
+          titleList.push(list[i])
+        }
+      }else if (list[i].type == 'select_two') {
+        if (list[i].model) {
+          select_twoList.push(list[i])
+        }
       } else {
         if (list[i].options.remote && list[i].options.remoteFunc) {
           funcList.push({
@@ -36,23 +44,24 @@ function findRemoteFunc (list, funcList, tokenFuncList, blankList) {
 export default function (data) {
 
   const funcList = []
-
   const tokenFuncList = []
-
   const blankList = []
+  const titleList = []
+  const select_twoList = []
 
-  findRemoteFunc(JSON.parse(data).list, funcList, tokenFuncList, blankList)
+  findRemoteFunc(JSON.parse(data).list, funcList, tokenFuncList, blankList,titleList,select_twoList)
 
   let funcTemplate = ''
-
   let blankTemplate = ''
+  let titleTemplate = ''
+  let select_twoTemplate = ''
 
   for(let i = 0; i < funcList.length; i++) {
     funcTemplate += `
             ${funcList[i].func} (resolve) {
-              // ${funcList[i].label} ${funcList[i].model}
+              ${funcList[i].label} ${funcList[i].model}
               // Call callback function once get the data from remote server
-              // resolve(data)
+              resolve(data)
             },
     `
   }
@@ -60,9 +69,9 @@ export default function (data) {
   for(let i = 0; i < tokenFuncList.length; i++) {
     funcTemplate += `
             ${tokenFuncList[i].func} (resolve) {
-              // ${tokenFuncList[i].label} ${tokenFuncList[i].model}
+              ${tokenFuncList[i].label} ${tokenFuncList[i].model}
               // Call callback function once get the token
-              // resolve(token)
+              resolve(token)
             },
     `
   }
@@ -76,6 +85,18 @@ export default function (data) {
     `
   }
 
+  for(let i = 0; i < titleList.length; i++) {
+    titleTemplate += `
+      <template slot="${titleList[i].name}" slot-scope="scope">
+        ${titleList[i].type} 
+        <input v-model="scope.model.${titleList[i].model}/>
+        <!-- use v-model="scope.model.${titleList[i].name}" to bind data -->
+      </template>
+    `
+  }
+  console.log(titleList)
+  console.log(titleTemplate)
+
   return `<!DOCTYPE html>
   <html>
   <head>
@@ -86,7 +107,7 @@ export default function (data) {
   <body>
     <div id="app">
       <fm-generate-form :data="jsonData" :remote="remoteFuncs" :value="editData" ref="generateForm">
-        ${blankTemplate}
+        ${titleTemplate}
       </fm-generate-form>
       <el-button type="primary" @click="handleSubmit">提交</el-button>
     </div>
@@ -94,6 +115,7 @@ export default function (data) {
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="https://unpkg.com/form-making/dist/FormMaking.umd.js"></script>
     <script>
+      import FmGenerateForm from './GenerateForm'
       new Vue({
         el: '#app',
         data: {
@@ -102,6 +124,9 @@ export default function (data) {
           remoteFuncs: {
             ${funcTemplate}
           }
+        },
+        components:{
+          FmGenerateForm
         },
         methods: {
           handleSubmit () {

@@ -7,7 +7,8 @@ export const basicComponents = [
     options: {
       width: '100%',
       height:'67',
-      mat:'',//上边距
+      // mat:'',//上边距
+      bort:true,//是否有上边框
       alignTxt:'center',//内容对齐方式
       contColor:'red',//内容颜色
       defaultValue: '',
@@ -24,10 +25,12 @@ export const basicComponents = [
     icon: 'icon-input',
     custom_label:true,//自定义标题
     options: {
-      titleWidth: '',
+      titleWidth: '',//标题宽度
+      titlepad:'',//标题左右留白
       width: '100%',
       height:'220',
-      mat:'',//上边距
+      // mat:'',//上边距
+      bort:true,//是否有上边框
       alignTxt:'center',//内容对齐方式
       labelColor:'red',//标题颜色
       contColor:'black',//内容颜色
@@ -47,7 +50,8 @@ export const basicComponents = [
     custom_label:true,//自定义标题
     options: {
       width: '100%',
-      mat:'',//上边距
+      // mat:'',//上边距
+      bort:true,//是否有上边框
       defaultValue: '',
       required: false,
       dataType: 'string',
@@ -62,6 +66,7 @@ export const basicComponents = [
     custom_label:true,//自定义标题
     options: {
       width: '100%',
+      bort:true,//是否有上边框
       defaultValue: '',
       required: false,
       disabled: false,
@@ -74,6 +79,7 @@ export const basicComponents = [
     icon: 'icon-number',
     options: {
       width: '',
+      bort:true,//是否有上边框
       required: false,
       defaultValue: 0,
       min: '',
@@ -88,6 +94,7 @@ export const basicComponents = [
     icon: 'icon-radio-active',
     options: {
       inline: false,
+      bort:true,//是否有上边框
       defaultValue: '',
       showLabel: false,
       options: [
@@ -121,6 +128,7 @@ export const basicComponents = [
     icon: 'icon-check-box',
     options: {
       inline: false,
+      bort:true,//是否有上边框
       defaultValue: [],
       showLabel: false,
       options: [
@@ -151,6 +159,7 @@ export const basicComponents = [
     icon: 'icon-time',
     options: {
       defaultValue: '21:19:56',
+      bort:true,//是否有上边框
       readonly: false,
       disabled: false,
       editable: true,
@@ -170,6 +179,7 @@ export const basicComponents = [
     icon: 'icon-date',
     options: {
       defaultValue: '',
+      bort:true,//是否有上边框
       readonly: false,
       disabled: false,
       editable: true,
@@ -189,6 +199,7 @@ export const basicComponents = [
     icon: 'icon-pingfen1',
     options: {
       defaultValue: null,
+      bort:true,//是否有上边框
       max: 5,
       disabled: false,
       allowHalf: false,
@@ -200,6 +211,7 @@ export const basicComponents = [
     icon: 'icon-color',
     options: {
       defaultValue: '',
+      bort:true,//是否有上边框
       disabled: false,
       showAlpha: false,
       required: false
@@ -210,6 +222,7 @@ export const basicComponents = [
     icon: 'icon-select',
     options: {
       defaultValue: '',
+      bort:true,//是否有上边框
       multiple: false,
       disabled: false,
       clearable: false,
@@ -244,13 +257,15 @@ export const basicComponents = [
     no_bor:true,
     options: {
       defaultValue: '',
+      bort:true,//是否有上边框
       multiple: false,
       disabled: false,
       clearable: false,
       placeholder: '请选择',
       required: false,
       showLabel: false,
-      width: '100%',
+      titleWidth:'',//标题宽度
+      width: '100%',//内容宽度
       alignTxt:'center',//内容对齐方式
       labelColor:'red',//标题颜色
       contColor:'red',//内容颜色
@@ -280,6 +295,7 @@ export const basicComponents = [
     icon: 'icon-switch',
     options: {
       defaultValue: false,
+      bort:true,//是否有上边框
       required: false,
       disabled: false,
     }
@@ -289,6 +305,7 @@ export const basicComponents = [
     icon: 'icon-slider',
     options: {
       defaultValue: 0,
+      bort:true,//是否有上边框
       disabled: false,
       required: false,
       min: 0,
@@ -304,17 +321,19 @@ export const basicComponents = [
     icon: 'icon-wenzishezhi-',
     options: {
       defaultValue: 'This is a text',
+      bort:true,//是否有上边框
       customClass: '',
     }
   },
-  {
-    type: 'head',
-    icon: 'icon-wenzishezhi-',
-    options: {
-      defaultValue: 'This is a text',
-      customClass: '',
-    }
-  }
+  // {
+  //   type: 'head',
+  //   icon: 'icon-wenzishezhi-',
+  //   options: {
+  //     defaultValue: 'This is a text',
+  //     bort:true,//是否有上边框
+  //     customClass: '',
+  //   }
+  // }
 ]
 
 export const advanceComponents = [
@@ -394,7 +413,28 @@ export const layoutComponents = [
     options: {
       gutter: 0,
       justify: 'start',
-      align: 'top'
+      align: 'top',
+      mat:'',//上边距
+    }
+  },
+  {
+    type: 'vertical',
+    icon: 'icon-grid-',
+    columns: [
+      {
+        span: 12,
+        list: []
+      },
+      {
+        span: 12,
+        list: []
+      }
+    ],
+    options: {
+      gutter: 0,
+      justify: 'start',
+      align: 'top',
+      mat:'',//上边距
     }
   }
 ]
