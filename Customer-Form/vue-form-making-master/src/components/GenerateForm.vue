@@ -24,6 +24,20 @@
                 <el-form-item v-if="citem.type=='blank'" :prop="citem.model" :key="citem.key" :class="{'borderRed':data.config.borderColor=='red','borderBlack':data.config.borderColor=='black','borderNode':data.config.borderColor=='noneColor'}">
                   <slot :name="citem.model" :model="models"></slot>
                 </el-form-item>
+
+                <!-- <div v-else-if="citem.type=='sign_two'" class="sign_two">
+                  <div class="sign_two_top">
+                    <el-form-item :prop="citem.model" :key="citem.key" :class="{'borderRed':data.config.borderColor=='red','borderBlack':data.config.borderColor=='black','borderNode':data.config.borderColor=='noneColor'}">
+                      <slot :name="citem.model" :model="models"></slot>
+                    </el-form-item>
+                  </div>
+                  <div class="sign_two_bom">
+                    <el-form-item :prop="citem.model" :key="citem.key" :class="{'borderRed':data.config.borderColor=='red','borderBlack':data.config.borderColor=='black','borderNode':data.config.borderColor=='noneColor'}">
+                      <slot :name="citem.model" :model="models"></slot>
+                    </el-form-item>
+                  </div>
+                </div> -->
+
                 <genetate-form-item v-else 
                   :key="citem.key" 
                   :models.sync="models" 
@@ -213,6 +227,12 @@ export default {
     .el-form-item__content{
       // border-left:1px solid red;
     }
+  }
+}
+.sign_two{
+  height:100%;
+  .sign_two_top{
+    height:50%;
   }
 }
 </style>

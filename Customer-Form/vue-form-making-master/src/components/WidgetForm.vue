@@ -20,27 +20,81 @@
                   :justify="element.options.justify"
                   :align="element.options.align"
                   @click.native="handleSelectWidget(index)">
-                  <el-col  v-for="(col, colIndex) in element.columns" :key="colIndex" :span="col.span ? col.span : 0">
+                  <el-col v-for="(col, colIndex) in element.columns" :key="colIndex" :span="col.span ? col.span : 0">
                       <draggable
+                        style="height:100%;"
                         v-model="col.list"
                         :no-transition-on-drag="true"
                         v-bind="{group:'people', ghostClass: 'ghost',animation: 200, handle: '.drag-widget'}"
                         @end="handleMoveEnd"
                         @add="handleWidgetColAdd($event, element, colIndex)"
                       >
-                        <transition-group name="fade" tag="div" class="widget-col-list">
-                          <widget-form-item 
-                            v-for="(el, i) in col.list"
-                            :key="el.key"
-                            v-if="el.key"
-                            :element="el" 
-                            :select.sync="selectWidget" 
-                            :index="i" 
-                            :data="col"
-                            :labelWidth="data.config.labelWidth"
-                            :alignType="data.config.labelPosition"
-                          >
-                          </widget-form-item>
+                        <transition-group name="fade" tag="div" class="widget-col-list" :key="colIndex">
+                          <div v-for="(el, i) in col.list" :key="i" class="vertical-grid-cont">
+                            <div class="vertical-grid" v-if="el.type=='vertical'" :class="{active: selectWidget.key == el.key}" @click.stop="handleSelectVertical(index,colIndex,i)">
+                              <!-- <div class="vertical-grid-item" v-for="(v,vi) in el.queue" :style="{height:100/el.queue.length+'%'}">vertical</div> -->
+                                <div class="vertical-grid-item" v-for="(v,vi) in el.queue" :style="{height:100/el.queue.length+'%'}">
+                                <!-- <div class="vertical-grid-item" v-for="(v,vi) in el.queue"> -->
+                                  <draggable
+                                    v-model="v.list"
+                                    :no-transition-on-drag="true"
+                                    v-bind="{group:'people', ghostClass: 'ghost',animation: 200, handle: '.drag-widget'}"
+                                    @add="handleWidgetQueueAdd($event, el, vi)"
+                                  >
+                                    <transition-group name="fade" tag="div" class="widget-queue-list" :key="vi">
+                                      <widget-form-item 
+                                        v-for="(vl,vli) in v.list"
+                                        :key="vl.key"
+                                        v-if="vl.key"
+                                        :element="vl" 
+                                        :select.sync="selectWidget" 
+                                        :index="vli" 
+                                        :data="v"
+                                        :commonConfig="data.config"
+                                        :labelWidth="data.config.labelWidth"
+                                        :alignType="data.config.labelPosition"
+                                      >
+                                      </widget-form-item>
+                                    </transition-group>
+                                  </draggable>
+                                </div>
+
+                                <div class="widget-view-action widget-col-action" v-if="selectWidget.key == el.key">
+                                  <i class="iconfont icon-trash" @click.stop="handleVerticalDelete(index,colIndex,i)"></i>
+                                </div>
+
+                                <div class="widget-view-drag widget-col-drag" v-if="selectWidget.key == el.key">
+                                  <i class="iconfont icon-drag drag-widget"></i>
+                                </div>
+                            </div>
+
+                            <widget-form-item 
+                              :key="el.key"
+                              v-else-if="el.key"
+                              :element="el" 
+                              :select.sync="selectWidget" 
+                              :index="i" 
+                              :data="col"
+                              :commonConfig="data.config"
+                              :labelWidth="data.config.labelWidth"
+                              :alignType="data.config.labelPosition"
+                            >
+                            </widget-form-item>
+
+                            <!-- <widget-form-item 
+                              v-for="(el, i) in col.list"
+                              :key="el.key"
+                              v-if="el.key"
+                              :element="el" 
+                              :select.sync="selectWidget" 
+                              :index="i" 
+                              :data="col"
+                              :commonConfig="data.config"
+                              :labelWidth="data.config.labelWidth"
+                              :alignType="data.config.labelPosition"
+                            >
+                            </widget-form-item> -->
+                          </div>
                         </transition-group>
                       </draggable>
                   </el-col>
@@ -53,8 +107,9 @@
                   </div>
                 </el-row>
             </template>
+
             <template v-else>
-              <widget-form-item v-if="element && element.key" :key="element.key" :element="element" :select.sync="selectWidget" :index="index" :data="data" :labelWidth="data.config.labelWidth" :alignType="data.config.labelPosition"></widget-form-item>
+              <widget-form-item v-if="element && element.key" :key="element.key" :element="element" :select.sync="selectWidget" :index="index" :data="data" :labelWidth="data.config.labelWidth" :alignType="data.config.labelPosition" :commonConfig="data.config"></widget-form-item>
             </template>
           </template>
         </transition-group>
@@ -95,6 +150,9 @@ export default {
     handleSelectWidget (index) {
       console.log(index, '#####')
       this.selectWidget = this.data.list[index]
+    },
+    handleSelectVertical(index,colIndex,i){
+      this.selectWidget = this.data.list[index].columns[colIndex].list[i]
     },
     handleWidgetAdd (evt) {
       // console.log('add', evt)
@@ -141,24 +199,27 @@ export default {
 
       this.selectWidget = this.data.list[newIndex]
     },
+    //栅格布局--添加
     handleWidgetColAdd ($event, row, colIndex) {
       console.log('coladd', $event, row, colIndex)
       const newIndex = $event.newIndex
       const oldIndex = $event.oldIndex
       const item = $event.item
+      console.log(row.columns[colIndex].list[newIndex])
+      console.log(this.data.list);
 
       // 防止布局元素的嵌套拖拽
-      if (item.className.indexOf('data-grid') >= 0) {
-        console.log('if')
-        console.log(item.tagName === 'DIV')
+      // if (item.className.indexOf('data-grid') >= 0) {
+      //   console.log('if')
+      //   console.log(item.tagName === 'DIV')
 
-        // 如果是列表中拖拽的元素需要还原到原来位置
-        item.tagName === 'DIV' && this.data.list.splice(oldIndex, 0, row.columns[colIndex].list[newIndex])
+      //   // 如果是列表中拖拽的元素需要还原到原来位置
+      //   item.tagName === 'DIV' && this.data.list.splice(oldIndex, 0, row.columns[colIndex].list[newIndex])
 
-        row.columns[colIndex].list.splice(newIndex, 1)
+      //   row.columns[colIndex].list.splice(newIndex, 1)
 
-        return false
-      }
+      //   return false
+      // }
 
       console.log('from', item)
 
@@ -190,6 +251,58 @@ export default {
 
       this.selectWidget = row.columns[colIndex].list[newIndex]
     },
+    //竖向栅格布局-添加
+    handleWidgetQueueAdd($event, row, colIndex){
+      console.log('queueadd', $event, row, colIndex)
+      const newIndex = $event.newIndex
+      const oldIndex = $event.oldIndex
+      const item = $event.item
+
+      // 防止布局元素的嵌套拖拽
+      // if (item.className.indexOf('data-grid') >= 0) {
+      //   console.log('if')
+      //   console.log(item.tagName === 'DIV')
+
+      //   // 如果是列表中拖拽的元素需要还原到原来位置
+      //   item.tagName === 'DIV' && this.data.list.splice(oldIndex, 0, row.queue[colIndex].list[newIndex])
+
+      //   row.queue[colIndex].list.splice(newIndex, 1)
+
+      //   return false
+      // }
+
+      console.log('from', item)
+
+      const key = Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
+
+      this.$set(row.queue[colIndex].list, newIndex, {
+        ...row.queue[colIndex].list[newIndex],
+        options: {
+          ...row.queue[colIndex].list[newIndex].options,
+          remoteFunc: 'func_' + key
+        },
+        key,
+        // 绑定键值
+        model: row.queue[colIndex].list[newIndex].type + '_' + key,
+        rules: []
+      })
+
+      if (row.queue[colIndex].list[newIndex].type === 'radio' || row.queue[colIndex].list[newIndex].type === 'checkbox' || row.queue[colIndex].list[newIndex].type === 'select') {
+        this.$set(row.queue[colIndex].list, newIndex, {
+          ...row.queue[colIndex].list[newIndex],
+          options: {
+            ...row.queue[colIndex].list[newIndex].options,
+            options: row.queue[colIndex].list[newIndex].options.options.map(item => ({
+              ...item
+            }))
+          }
+        })
+      }
+      console.log(row.queue[colIndex].list[newIndex])
+
+      this.selectWidget = row.queue[colIndex].list[newIndex]
+    },
+    //栅格布局删除
     handleWidgetDelete (index) {
       if (this.data.list.length - 1 === index) {
         if (index === 0) {
@@ -205,6 +318,29 @@ export default {
         this.data.list.splice(index, 1)
       })
     },
+    //竖向栅格布局删除
+    handleVerticalDelete (index,colIndex,i) {
+      if (this.data.list[index].columns[colIndex].list.length - 1 === i) {
+        if (i === 0) {
+          this.selectWidget = {}
+        } else {
+          this.selectWidget = this.data.list[index].columns[colIndex].list[i - 1]
+        }
+      } else {
+        this.selectWidget = this.data.list[index].columns[colIndex].list[i + 1]
+      }
+
+      this.$nextTick(() => {
+        console.log(this.data.list)
+        console.log(this.data.list[index].columns[colIndex].list)
+        console.log(i)
+        let List=this.data.list[index].columns[colIndex].list;
+        List.splice(i, 1);
+        console.log(List)
+        this.data.list[index].columns[colIndex].list=[...List]
+        // console.log(this.data.list[index].columns[colIndex].list)
+      })
+    }
   },
   watch: {
     select (val) {
@@ -236,6 +372,24 @@ export default {
     //     }
     //   }
     // }
+    .vertical-grid-cont{
+      padding:5px;
+      .vertical-grid{
+        height:100%;
+        padding:2px;
+        border:1px green dashed; 
+        .vertical-grid-item{
+          border-bottom:1px green dashed; 
+          &:last-child{
+            border-bottom:0; 
+          }
+          .widget-queue-list{
+            min-height:40px;
+          }
+        }
+      }
+    }
+    
   }
 </style>
 

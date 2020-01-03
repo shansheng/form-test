@@ -1,11 +1,16 @@
 <template>
   <el-form-item class="widget-view "
-      v-if="element && element.key" 
-      :class="{active: selectWidget.key == element.key, 'is_req': element.options.required,'no_label':element.no_label,'textarea_lh':element.type == 'textarea'}"
-      :style="{'padding-top': element.options.mat+'px'}"
-      :label="labelWidth>0 ? element.name : ''"
-      @click.native.stop="handleSelectWidget(index)"
+    v-if="element && element.key" 
+    :class="{active: selectWidget.key == element.key, 'is_req': element.options.required,'no_label':element.no_label,'textarea_lh':element.type == 'textarea','custom_label':element.custom_label}"
+    :style="{'padding-top': element.options.mat+'px'}"
+    :label="commonConfig.labelWidth>0 ? element.name : ''"
+    @click.native.stop="handleSelectWidget(index)"
   >
+
+        <div 
+          class="custom_name" 
+          v-if="element.custom_label"
+        >{{element.name}}</div>
         
         <template v-if="element.type == 'title'">
           <el-input 
@@ -23,6 +28,19 @@
               class="sign_cont"
               :style="{'height':element.options.height+'px'}"
             >
+            </div>
+          </div>
+        </template>
+
+        <template v-if="element.type == 'sign_two'">
+          <div class="sign_two_item" v-for="(sign,i) in element.options.list" :key="i">
+            <div class="sign_two_name" :style="{'left':'-'+commonConfig.labelWidth+'px'}">{{sign.name}}</div>
+            <div class="sign_com">
+              <div 
+                class="sign_cont"
+                :style="{'height':element.options.height+'px'}"
+              >
+              </div>
             </div>
           </div>
         </template>
@@ -150,7 +168,7 @@
           <div class="select_two">
             <div 
               class="select_two_tl"
-              :class="{'select_two_tl_fl':alignType=='left','select_two_tl_cen':alignType=='center','select_two_tl_fr':alignType=='right'}"
+              :class="{'select_two_tl_fl':commonConfig.alignType=='left','select_two_tl_cen':commonConfig.alignType=='center','select_two_tl_fr':commonConfig.alignType=='right'}"
               :style="{width:element.options.width ? element.options.width+'px' :'215px'}"
             >{{element.name}}</div>
             <el-select
@@ -247,7 +265,7 @@
 <script>
 import FmUpload from './Upload'
 export default {
-  props: ['element', 'select', 'index', 'data','labelWidth','alignType'],
+  props: ['element', 'select', 'index', 'data','labelWidth','alignType','commonConfig'],
   components: {
     FmUpload,
   },
@@ -352,6 +370,20 @@ export default {
   .sign_cont{
     border-radius: 4px;
     border: 1px solid #DCDFE6;
+  }
+}
+
+//自定义标题
+.custom_label{
+  /deep/ .el-form-item__label{
+    display:none;
+  }
+  .sign_two_item{
+    position:relative;
+    .sign_two_name{
+      position:absolute;
+      top:0;
+    }
   }
 }
 </style>

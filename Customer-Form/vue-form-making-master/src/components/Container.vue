@@ -98,7 +98,6 @@
           form
         >
           <generate-form insite="true" @on-change="handleDataChange" v-if="previewVisible" :data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm">
-
             <template v-slot:blank="scope">
               Width <el-input v-model="scope.model.blank.width" style="width: 100px"></el-input>
               Height <el-input v-model="scope.model.blank.height" style="width: 100px"></el-input>
@@ -204,7 +203,7 @@ export default {
     },
     basicFields: {
       type: Array,
-      default: () => ['title','input', 'textarea', 'number', 'radio', 'checkbox', 'time', 'date', 'rate', 'color', 'select','select_two', 'switch', 'slider', 'text','sign']
+      default: () => ['title','input', 'textarea', 'number', 'radio', 'checkbox', 'time', 'date', 'rate', 'color', 'select','select_two', 'switch', 'slider', 'text','sign','sign_two']
     },
     advanceFields: {
       type: Array,
@@ -212,7 +211,7 @@ export default {
     },
     layoutFields: {
       type: Array,
-      default: () => ['grid']
+      default: () => ['grid','vertical']
     }
   },
   data () {

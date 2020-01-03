@@ -4,6 +4,7 @@ export default {
       fields: {
         title: '标题',
         sign:'审批',
+        sign_two:'审批上下',
         input: '单行文本',
         textarea: '多行文本',
         number: '计数器',

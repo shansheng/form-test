@@ -4,6 +4,7 @@ export default {
       fields: {
         title: 'Title',
         sign:'sign',
+        sign_two:'sign_two',
         input: 'Input',
         textarea: 'Textarea',
         number: 'Number',

@@ -45,6 +45,40 @@ export const basicComponents = [
     }
   },
   {
+    type: 'sign_two',
+    icon: 'icon-input',
+    custom_label:true,//自定义标题
+    options: {
+      titleWidth: '',//标题宽度
+      titlepad:'',//标题左右留白
+      width: '100%',
+      height:'220',
+      // mat:'',//上边距
+      bort:true,//是否有上边框
+      alignTxt:'center',//内容对齐方式
+      labelColor:'red',//标题颜色
+      contColor:'black',//内容颜色
+      borderColor:'red',//边框颜色
+      defaultValue: '',
+      required: false,
+      dataType: 'string',
+      pattern: '',
+      placeholder: '',
+      disabled: false,
+      fontSize:'16',
+      list:[
+        {
+          name:'审批上下1',
+          val:{}
+        },
+        {
+          name:'审批上下2',
+          val:{}
+        }
+      ]
+    }
+  },
+  {
     type: 'input',
     icon: 'icon-input',
     custom_label:true,//自定义标题
@@ -420,7 +454,7 @@ export const layoutComponents = [
   {
     type: 'vertical',
     icon: 'icon-grid-',
-    columns: [
+    queue: [
       {
         span: 12,
         list: []

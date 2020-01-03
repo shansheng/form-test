@@ -40,6 +40,23 @@
           </div>  
         </template>
 
+        <!-- <template v-else-if="widget.type == 'sign_two'">
+          <div class=""></div>
+          <div class="sign_com" @click="dialogSign = true">
+            <div 
+              :style="{'min-height':widget.options.height>0 ? widget.options.height+'px':'100px'}"
+              class="sign_cont"
+              :class="{'redColor':widget.options.contColor=='red','blackColor':widget.options.contColor=='black'}"
+            >
+              <div class="sign_item" v-for="(item,index) in signList" :key="index">
+                <div>{{item.cont}}</div>
+                <div class="sign_cur">{{item.sign_cur}}</div>
+                <div class="sign_time">{{item.time}}</div>
+              </div>
+            </div>
+          </div>  
+        </template> -->
+
 
         <template v-if="widget.type == 'input'" >
           <el-input 

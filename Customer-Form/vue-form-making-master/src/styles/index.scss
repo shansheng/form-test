@@ -145,7 +145,8 @@ $primary-background-color: #ecf5ff;
   bottom: 0;
 
   
-
+  
+  //栅格布局
   .widget-form-list{
     background: #fff;
     // border: 1px dashed #999;
@@ -157,6 +158,26 @@ $primary-background-color: #ecf5ff;
       min-height: 50px;
       border: 1px dashed #ccc;
       background: #fff;
+
+
+      height:100%;
+      //竖向栅格布局
+      .vertical-grid-cont{
+        height:100%;
+        .vertical-grid{
+          position:relative;
+          &.active{
+            outline: 2px solid green;
+            border: 1px solid green;
+            .widget-view-action.widget-col-action{
+              background:green;
+            }
+            .widget-view-drag.widget-col-drag{
+              background:green;
+            }
+          }
+        }
+      }
     }
 
     .widget-view{
@@ -165,6 +186,13 @@ $primary-background-color: #ecf5ff;
       border: 1px dashed rgba(170,170,170,0.7);
       background-color: rgba(236, 245, 255, .3);
       margin: 2px;
+
+      //自定义标题
+      .custom_name{
+        position:absolute;
+        top:0;
+        left:0;
+      }
 
       .el-form-item__content{
         position: unset;
