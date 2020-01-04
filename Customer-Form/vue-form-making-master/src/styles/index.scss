@@ -160,12 +160,17 @@ $primary-background-color: #ecf5ff;
       background: #fff;
 
 
+
       height:100%;
       //竖向栅格布局
       .vertical-grid-cont{
         height:100%;
+        padding:5px;
         .vertical-grid{
           position:relative;
+          height:100%;
+          padding:2px;
+          border:1px green dashed; 
           &.active{
             outline: 2px solid green;
             border: 1px solid green;
@@ -174,6 +179,15 @@ $primary-background-color: #ecf5ff;
             }
             .widget-view-drag.widget-col-drag{
               background:green;
+            }
+          }
+          .vertical-grid-item{
+            border-bottom:1px green dashed; 
+            &:last-child{
+              border-bottom:0; 
+            }
+            .widget-queue-list{
+              min-height:40px;
             }
           }
         }
